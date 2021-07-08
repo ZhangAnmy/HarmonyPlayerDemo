@@ -20,7 +20,6 @@ import ohos.hiviewdfx.HiLogLabel;
 import ohos.media.audio.AudioManager;
 import ohos.media.common.Source;
 import ohos.media.player.Player;
-import ohos.powermanager.PowerManager;
 import ohos.rpc.IRemoteObject;
 import ohos.rpc.RemoteException;
 
