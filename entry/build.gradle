@@ -1,0 +1,29 @@
+apply plugin: 'com.huawei.ohos.hap'
+apply plugin: 'com.huawei.ohos.decctest'
+ohos {
+    signingConfigs {
+        debug {
+            storeFile file('D:/00-Work/12-WatchProject/certificate/anmyWatchAppDebug.p12')
+            storePassword '00000018F8178C9CD870589A62ABB9DAB73EACCA1079B45883B18EF81081B6D0C95E2803081B5AD9'
+            keyAlias 'anmyWatchDebug'
+            keyPassword '0000001802D55A74A762C34055E0E6A19C96EC95F1F4CBD61C85321C753DEA5368B441A6187236F3'
+            signAlg 'SHA256withECDSA'
+            profile file('D:/00-Work/11-Codes/certificate_radioLine/RadioLineDemoHAPProfileDebug.p7b')
+            certpath file('D:/00-Work/12-WatchProject/certificate/anmyWatchAppDebug.cer')
+        }
+    }
+    compileSdkVersion 5
+    defaultConfig {
+        compatibleSdkVersion 5
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.har'])
+    testImplementation 'junit:junit:4.12'
+    ohosTestImplementation 'decc.testkit:harmonyjunitrunner:0.3'
+}
+
+decc {
+    supportType = ['html','xml']
+}

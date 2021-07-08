@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:ohos="http://schemas.huawei.com/res/ohos" ohos:oneshot="false">
+	<item ohos:element="$media:loading" ohos:duration="100"/>
+	<item ohos:element="$media:loading_02" ohos:duration="100"/>
+	<item ohos:element="$media:loading_03" ohos:duration="100"/>
+	<item ohos:element="$media:loading" ohos:duration="100"/>
+</animation-list>

@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "PlayerDemo"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Wearable_Empty Feature Ability"
+    },
+    {
+      "name": "hello_player",
+      "value": "Welcome"
+    },
+    {
+      "name": "playerserviceability_description",
+      "value": "hap sample empty service"
+    },
+    {
+      "name": "serviceability_description",
+      "value": "hap sample empty service"
+    },
+    {
+      "name": "ijkaudioplayerserviceability_description",
+      "value": "hap sample empty service"
+    }
+  ]
+}

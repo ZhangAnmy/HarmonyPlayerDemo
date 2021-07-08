@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:orientation="vertical">
+
+    <DirectionalLayout
+        ohos:id="$+id:ongoing_test"
+        ohos:height="match_parent"
+        ohos:width="match_parent"
+        ohos:layout_alignment="vertical_center"
+        ohos:orientation="vertical">
+
+        <Text
+            ohos:id="$+id:test"
+            ohos:weight="1"
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:text_color="#FFFFFF"
+            ohos:multiple_lines="true"
+            ohos:text="Hi,This is test page"
+            ohos:text_alignment="center"
+            ohos:layout_alignment="center"
+            ohos:bottom_margin="20px"
+            />
+
+        <Image
+            ohos:id="$+id:imgPause"
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:left_margin="40px"
+            ohos:right_margin="40px"
+            ohos:image_src="$media:pause"/>
+
+    </DirectionalLayout>
+
+</DirectionalLayout>

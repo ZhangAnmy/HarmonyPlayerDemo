@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<DirectionalLayout
+	xmlns:ohos="http://schemas.huawei.com/res/ohos"
+	ohos:height="match_parent"
+	ohos:width="match_parent"
+	ohos:background_element="#000000"
+	ohos:alignment="center"
+	ohos:orientation="vertical">
+
+	<StackLayout
+		ohos:height="match_parent"
+		ohos:width="match_parent">
+		<DirectionalLayout
+			ohos:height="match_parent"
+			ohos:width="match_parent"
+			ohos:background_element="$media:icon"
+			ohos:orientation="vertical">
+			<Text
+				ohos:height="match_content"
+				ohos:width="match_content"
+				ohos:top_margin="50px"
+				ohos:text_size="38px"
+				ohos:text_weight="700"
+				ohos:focus_border_radius="10px"
+				ohos:focus_border_width="1px"
+				ohos:text_color="#FFFFFF"
+				ohos:layout_alignment="center"/>
+		</DirectionalLayout>
+
+		<DirectionalLayout
+			ohos:id="$+id:main_content"
+			ohos:height="match_parent"
+			ohos:width="match_parent"
+			ohos:background_element="#000000"
+			ohos:alignment="center"
+			ohos:orientation="vertical"
+			ohos:visibility="visible">
+			<Image
+				ohos:id="$+id:logo"
+				ohos:height="match_content"
+				ohos:width="match_content"
+				ohos:bottom_margin="5px"
+				ohos:image_src="$media:icon"/>
+
+			<Text
+				ohos:height="match_content"
+				ohos:width="match_content"
+				ohos:bottom_margin="15px"
+				ohos:text="IjkPlayer"
+				ohos:text_size="26px"
+				ohos:text_weight="700"
+				ohos:text_color="#FF085AE9"/>
+
+			<DirectionalLayout
+				ohos:height="match_content"
+				ohos:width="match_parent"
+				ohos:alignment="center"
+				ohos:orientation="horizontal">
+
+				<Image
+					ohos:id="$+id:imgVolumeQuiet"
+					ohos:height="match_content"
+					ohos:width="match_content"
+					ohos:image_src="$media:volume_down"/>
+				<Image
+					ohos:id="$+id:imgPlayer"
+					ohos:height="match_content"
+					ohos:width="match_content"
+					ohos:left_margin="40px"
+					ohos:right_margin="40px"
+					ohos:image_src="$media:play"/>
+				<Image
+					ohos:id="$+id:imgVolumeLoud"
+					ohos:height="match_content"
+					ohos:width="match_content"
+					ohos:image_src="$media:volume_up"/>
+
+			</DirectionalLayout>
+
+			<ohos.agp.components.ProgressBar
+				ohos:id="$+id:VideoProgressBar"
+				ohos:width="240px"
+				ohos:height="match_content"
+				ohos:top_margin="25"
+				ohos:progress_color="#FFFFFF"
+				ohos:progress_width="10"
+				ohos:visibility="invisible"
+				ohos:max="100" />
+
+		</DirectionalLayout>
+		<DirectionalLayout
+			ohos:height="match_parent"
+			ohos:width="match_parent"
+			ohos:alignment="center"
+			ohos:id="$+id:network_status_content"
+			ohos:background_element="#000000"
+			ohos:visibility="invisible"
+			>
+			<Text
+				ohos:height="match_content"
+				ohos:width="match_content"
+				ohos:text="Please check the network status of your watch."
+				ohos:text_size="40px"
+				ohos:text_weight="700"
+				ohos:multiple_lines="true"
+				ohos:text_alignment="center"
+				ohos:text_color="#FFFFFF"/>
+		</DirectionalLayout>
+
+		<DirectionalLayout
+			ohos:height="match_parent"
+			ohos:width="match_parent"
+			ohos:alignment="center"
+			ohos:id="$+id:loading_img_content"
+			ohos:alpha="0.6"
+			ohos:background_element="#000000"
+			ohos:visibility="invisible"
+			>
+			<Image
+				ohos:id="$+id:loading_img"
+				ohos:height="100px"
+				ohos:width="100px"
+				ohos:image_src="$media:loading"/>
+		</DirectionalLayout>
+	</StackLayout>
+
+</DirectionalLayout>

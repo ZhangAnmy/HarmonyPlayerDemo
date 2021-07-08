@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:orientation="vertical"
+    ohos:background_element="$graphic:background_ability_main">
+
+<DirectionalLayout
+    ohos:id="$+id:no_favorite_container"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:layout_alignment="vertical_center"
+    ohos:orientation="vertical">
+
+
+    <Text
+        ohos:top_margin="28px"
+        ohos:id="$+id:loading_info"
+        ohos:text_color="#FFFFFF"
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:padding="4vp"
+        ohos:weight="1"
+        ohos:text="oops..."
+        ohos:text_size="36px"
+        ohos:text_weight="700"
+        ohos:alignment="top"
+
+        ohos:layout_alignment="horizontal_center"/>
+
+    <Text
+        ohos:weight="1"
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:text_color="#FFFFFF"
+        ohos:multiple_lines="true"
+        ohos:text=" It seems you don't have internet connection"
+        ohos:text_alignment="center"
+        ohos:layout_alignment="center"
+        ohos:bottom_margin="20px"
+        />
+
+
+</DirectionalLayout>
+
+
+</DirectionalLayout>

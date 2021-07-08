@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ohos.agp.components.ScrollView
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:background_element="#FF2B2B47"
+    ohos:id="$+id:main_root">
+
+   <!-- <DirectionalLayout
+        xmlns:ohos="http://schemas.huawei.com/res/ohos"
+        ohos:height="match_parent"
+        ohos:width="match_parent"
+        ohos:background_element="$media:icon_start"
+        ohos:orientation="vertical">
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:top_margin="50px"
+            ohos:text_size="38px"
+            ohos:text_weight="700"
+            ohos:focus_border_radius="10px"
+            ohos:focus_border_width="1px"
+            ohos:text_color="#FFFFFF"
+            ohos:layout_alignment="center"/>
+    </DirectionalLayout>-->
+
+    <DirectionalLayout
+        ohos:height="match_parent"
+        ohos:width="match_parent"
+        ohos:orientation="vertical">
+
+        <!--<Text
+            ohos:id="$+id:text_hello"
+            ohos:height="100"
+            ohos:width="360"
+            ohos:top_margin="50"
+            ohos:layout_alignment="horizontal_center"
+            ohos:text_color="#FFF2F8F8"
+            ohos:text="Welcome"
+            ohos:text_weight="800"
+            ohos:text_alignment="center"
+            ohos:text_size="50"/>-->
+<!--
+        <TextField
+        ohos:id="$+id:textField_num"
+        ohos:width="match_parent"
+        ohos:height="match_content"
+        ohos:text_size="40"
+        ohos:background_element="$graphic:background_ability_main"
+        ohos:left_margin="10"
+        ohos:right_margin="10"
+        ohos:bottom_margin="10"
+        ohos:right_padding="15"
+        ohos:left_padding="15"
+        ohos:text="This is just for testing the function. Hello everyone~ This is Anmy"
+        ohos:text_input_type="pattern_number"
+        ohos:selection_color="#ff0000"
+        />-->
+
+        <Button
+            ohos:id="$+id:main_channel_1"
+            ohos:width="300"
+            ohos:height="100"
+            ohos:background_element="$graphic:background_ability_main"
+            ohos:layout_alignment="horizontal_center"
+            ohos:margin="5"
+            ohos:text="DefaultPlayer"
+            ohos:text_color="#FFF2F8F8"
+            ohos:text_size="40"/>
+        <Button
+            ohos:id="$+id:main_channel_2"
+            ohos:width="300"
+            ohos:height="100"
+            ohos:background_element="$graphic:background_ability_main"
+            ohos:layout_alignment="horizontal_center"
+            ohos:margin="5"
+            ohos:text="ijkPlayer"
+            ohos:text_color="#FFF2F8F8"
+            ohos:text_size="40"/>
+
+        <Button
+            ohos:id="$+id:publish_button"
+            ohos:width="300"
+            ohos:height="100"
+            ohos:background_element="$graphic:background_ability_main"
+            ohos:layout_alignment="horizontal_center"
+            ohos:margin="5"
+            ohos:text="notification"
+            ohos:text_color="#FFF2F8F8"
+            ohos:text_size="40"/>
+
+        <Text
+            ohos:id="$+id:notify2_reply"
+            ohos:width="match_parent"
+            ohos:height="match_content"
+            ohos:margin="10vp"
+            ohos:text="Change me"
+            ohos:text_size="16fp"
+            ohos:text_color="#ff888888"
+            ohos:text_alignment="center"
+            ohos:multiple_lines="true"
+            ohos:top_margin="5vp"/>
+
+    </DirectionalLayout>
+
+    <DirectionalLayout
+        ohos:height="match_parent"
+        ohos:width="match_parent"
+        ohos:alignment="center"
+        ohos:id="$+id:network_status_content"
+        ohos:background_element="#000000"
+        ohos:visibility="invisible"
+        >
+        <Text
+            ohos:height="match_content"
+            ohos:width="match_content"
+            ohos:text="Please check the network status of your watch!"
+            ohos:text_size="40px"
+            ohos:text_weight="700"
+            ohos:multiple_lines="true"
+            ohos:text_alignment="center"
+            ohos:text_color="#FFFFFF"/>
+    </DirectionalLayout>
+
+</ohos.agp.components.ScrollView>
