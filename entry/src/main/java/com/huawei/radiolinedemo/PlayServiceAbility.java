@@ -1,5 +1,6 @@
 package com.huawei.radiolinedemo;
 
+import com.huawei.radiolinedemo.utils.ImageTools;
 import com.huawei.radiolinedemo.utils.LogUtils;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
@@ -17,13 +18,12 @@ import ohos.event.notification.NotificationRequest;
 import ohos.event.notification.NotificationSlot;
 import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;
+import ohos.media.audio.AudioInterrupt;
 import ohos.media.audio.AudioManager;
 import ohos.media.common.Source;
 import ohos.media.player.Player;
 import ohos.rpc.IRemoteObject;
 import ohos.rpc.RemoteException;
-
-import ohos.media.audio.AudioInterrupt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +43,9 @@ public class PlayServiceAbility extends Ability {
 
     public void onStart(Intent intent) {
         super.onStart(intent);
-        defineNotificationSlot("Ongoing_Overview","slot_anmyPlayer",NotificationSlot.LEVEL_DEFAULT);
-        publishNotification();
+        defineNotificationSlot();
+        //publishNotification();
+        publishNotification2();
 
         audioInterrupt.setInterruptListener(new AudioInterrupt.InterruptListener() {
             @Override
@@ -60,32 +61,42 @@ public class PlayServiceAbility extends Ability {
         });
     }
 
+    private void defineNotificationSlot() {
+        slot = new NotificationSlot("Ongoing_Overview", "Music_default", NotificationSlot.LEVEL_DEFAULT);
+        slot.setDescription("NotificationSlotDescription");
+        try {
+            NotificationHelper.addNotificationSlot(slot);
+        } catch (RemoteException ex) {
+            System.out.println( "Add ongoing card slot exception");
+        }
+    }
+
     private void publishNotification() {
         int notificationId = 1005;
         notificationRequest = new NotificationRequest(this, notificationId);
         notificationRequest.setSlotId(slot.getId());
 
-        String textContent = "Anmy Ongoing";
+        String textContent = "AnmyPlayer";
         NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
-        content.setText(textContent); // 设置卡片内容
+        content.setText(textContent);
         NotificationRequest.NotificationContent notificationContent = new NotificationRequest.NotificationContent(content);
         notificationRequest.setContent(notificationContent);
         keepBackgroundRunning(notificationId, notificationRequest);
 
         IntentParams params = new IntentParams();
-        params.setParam("MinusOneExtraTag","Ongoing_Overview"); // MinusOneExtraTag必须准确无误
+        params.setParam("MinusOneExtraTag","Ongoing_Overview");
         notificationRequest.setAdditionalData(params);
 
-        componentProvider = new ComponentProvider(ResourceTable.Layout_test, this); // 创建ComponentProvider对象
+        componentProvider = new ComponentProvider(ResourceTable.Layout_test, this);
         componentProvider.setText(ResourceTable.Id_ongoing_test,"Anmy music");
         //componentProvider.setImagePixelMap(ResourceTable.Id_imgPause,ImageTools.getPixelMap(this, ResourceTable.Media_pause));
-        componentProvider.setString(ResourceTable.Id_ongoing_test, "Ongoing setText", "Ongoing TextContent"); // 设置布局中的文本内容
+        //componentProvider.setString(ResourceTable.Id_ongoing_test, "Ongoing setText", "Ongoing TextContent"); // 设置布局中的文本内容
         notificationRequest.setCustomView(componentProvider);
 
         // 获取IntentAgent实例
         IntentAgent intentAgent = createIntentAgent(MainAbility.class.getName(),
                 IntentAgentConstant.OperationType.START_ABILITY);
-        componentProvider.setIntentAgent(ResourceTable.Id_test,intentAgent);  // 设置跳转事件信息
+        componentProvider.setIntentAgent(ResourceTable.Id_ongoing_title,intentAgent);  // 设置跳转事件信息
         //设置通知可以触发的事件
         notificationRequest.setIntentAgent(intentAgent);// 设置通知可以触发的事件
 
@@ -99,30 +110,57 @@ public class PlayServiceAbility extends Ability {
         keepBackgroundRunning(notificationId, notificationRequest);
     }
 
-    private void defineNotificationSlot(String id, String name, int importance) {
-        slot = new NotificationSlot(id, name, importance);
-        slot.setDescription("Ongoing SlotDescription");
-        try {
-            NotificationHelper.addNotificationSlot(slot);
-        } catch (RemoteException ex) {
-            HiLog.error(TAG, "Add ongoing card slot exception");
-        }
-    }
+    private void publishNotification2() {
+        int notificationId = 1005;
+        NotificationRequest request = new NotificationRequest(this, notificationId);
+        request.setSlotId(slot.getId());
+        NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
+        NotificationRequest.NotificationContent notificationContent = new NotificationRequest.NotificationContent(content);
+        request.setContent(notificationContent);
+        keepBackgroundRunning(notificationId, request);
 
-    private IntentAgent createIntentAgent(String ability, IntentAgentConstant.OperationType operationType) {
-        // 指定要启动的ability属性
+        IntentParams params = new IntentParams();
+        params.setParam("MinusOneExtraTag","Ongoing_Overview"); // MinusOneExtraTag必须准确无误
+        request.setAdditionalData(params);
+
+        componentProvider = new ComponentProvider(ResourceTable.Layout_test, this);
+        componentProvider.setText(ResourceTable.Id_ongoing_title, "Local Music");
+        componentProvider.setImagePixelMap(ResourceTable.Id_ongoing_play, ImageTools.getPixelMap(this, ResourceTable.Media_pause));
+        request.setCustomView(componentProvider);
+
         Intent intent = new Intent();
         Operation operation = new Intent.OperationBuilder()
                 .withDeviceId("")
                 .withBundleName("com.huawei.radiolinedemo")
                 .withAbilityName("com.huawei.radiolinedemo.MainAbility")
                 .build();
-        intent.setOperation(operation); // 创建跳转的目的ability
+        intent.setOperation(operation);
         List<Intent> intentList = new ArrayList<>();
         intentList.add(intent);
-        // 指定启动一个有页面的ability
+        IntentAgentInfo paramsInfo = new IntentAgentInfo(request.getNotificationId(),
+                IntentAgentConstant.OperationType.START_ABILITY, IntentAgentConstant.Flags.UPDATE_PRESENT_FLAG, intentList, null);
+        IntentAgent intentAgent = IntentAgentHelper.getIntentAgent(getContext(), paramsInfo);
+        componentProvider.setIntentAgent(ResourceTable.Id_ongoing_title, intentAgent);
+        try {
+            NotificationHelper.publishNotification(request);
+        } catch (RemoteException exception) {
+            System.out.println("A remote exception occurred when publish ongoing card notification.");
+        }
+        keepBackgroundRunning(notificationId, request);
+    }
+
+    private IntentAgent createIntentAgent(String ability, IntentAgentConstant.OperationType operationType) {
+        Intent intent = new Intent();
+        Operation operation = new Intent.OperationBuilder()
+                .withDeviceId("")
+                .withBundleName("com.huawei.radiolinedemo")
+                .withAbilityName("com.huawei.radiolinedemo.MainAbility")
+                .build();
+        intent.setOperation(operation);
+        List<Intent> intentList = new ArrayList<>();
+        intentList.add(intent);
         IntentAgentInfo agentInfo = new IntentAgentInfo(notificationRequest.getNotificationId(), operationType,
-                IntentAgentConstant.Flags.UPDATE_PRESENT_FLAG, intentList, new IntentParams());
+                IntentAgentConstant.Flags.UPDATE_PRESENT_FLAG, intentList, null);
         return IntentAgentHelper.getIntentAgent(getContext(), agentInfo);
     }
 
@@ -132,14 +170,14 @@ public class PlayServiceAbility extends Ability {
         HiLog.warn(TAG, "--------onBackground-----");
     }
 
-    //播放时调用
+    //Call it when play
     public void toggle() {
         if (mPlayer.isNowPlaying()) {
-            //音频失去焦点
+            //Audio out of focus
             VolumeUtils.getAudioManager().deactivateAudioInterrupt(audioInterrupt);
             mPlayer.pause();
         } else {
-            //音频获取焦点
+            //Audio gets focus
             VolumeUtils.getAudioManager().activateAudioInterrupt(audioInterrupt);
             mPlayer.play();
         }

@@ -3,6 +3,7 @@
     xmlns:ohos="http://schemas.huawei.com/res/ohos"
     ohos:height="match_parent"
     ohos:width="match_parent"
+    ohos:background_element="#FFFFFFFF"
     ohos:orientation="vertical">
 
     <DirectionalLayout
@@ -13,25 +14,56 @@
         ohos:orientation="vertical">
 
         <Text
-            ohos:id="$+id:test"
+            ohos:id="$+id:ongoing_title"
             ohos:weight="1"
             ohos:height="match_content"
             ohos:width="match_content"
-            ohos:text_color="#FFFFFF"
+            ohos:text_color="#FF000000"
             ohos:multiple_lines="true"
-            ohos:text="Hi,This is test page"
+            ohos:text="Onging player"
+            ohos:text_size="30fp"
             ohos:text_alignment="center"
             ohos:layout_alignment="center"
             ohos:bottom_margin="20px"
             />
 
-        <Image
-            ohos:id="$+id:imgPause"
-            ohos:height="match_content"
-            ohos:width="match_content"
-            ohos:left_margin="40px"
-            ohos:right_margin="40px"
-            ohos:image_src="$media:pause"/>
+        <DirectionalLayout
+            ohos:height="match_parent"
+            ohos:width="match_parent"
+            ohos:bottom_margin="12vp"
+            ohos:orientation="horizontal">
+
+            <StackLayout
+                ohos:height="match_parent"
+                ohos:width="0vp"
+                ohos:weight="1">
+
+                <Image
+                    ohos:id="$+id:ongoing_play"
+                    ohos:height="80vp"
+                    ohos:width="80vp"
+                    ohos:image_src="$media:play"
+                    ohos:layout_alignment="left|bottom"
+                    ohos:scale_mode="zoom_center"
+                    />
+            </StackLayout>
+
+            <StackLayout
+                ohos:height="match_parent"
+                ohos:width="0vp"
+                ohos:weight="1">
+
+                <Image
+                    ohos:id="$+id:ongoing_stop"
+                    ohos:height="80vp"
+                    ohos:width="80vp"
+                    ohos:horizontal_center="true"
+                    ohos:image_src="$media:pause"
+                    ohos:layout_alignment="right|bottom"
+                    ohos:right_margin="12vp"
+                    ohos:scale_mode="zoom_end"/>
+            </StackLayout>
+        </DirectionalLayout>
 
     </DirectionalLayout>
 

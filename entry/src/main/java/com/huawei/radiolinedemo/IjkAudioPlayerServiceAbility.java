@@ -37,7 +37,6 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     private IMediaPlayer.OnErrorListener mOnErrorListener;
     private IMediaPlayer.OnInfoListener mOnInfoListener;
 
-    // all possible internal states
     private static final int STATE_ERROR = -1;
     private static final int STATE_IDLE = 0;
     private static final int STATE_PREPARING = 1;
@@ -46,11 +45,6 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     private static final int STATE_PAUSED = 4;
     private static final int STATE_PLAYBACK_COMPLETED = 5;
 
-    // mCurrentState is a VideoView object's current state.
-    // mTargetState is the state that a method caller intends to reach.
-    // For instance, regardless the VideoView object's current state,
-    // calling pause() intends to bring the object to a target state
-    // of STATE_PAUSED.
     private int mCurrentState = STATE_IDLE;
     private int mTargetState = STATE_IDLE;
 
@@ -63,7 +57,7 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     public void onStart(Intent intent) {
         HiLog.info (TAG, "IjkAudioPlayerServiceAbility::onStart");
         super.onStart(intent);
-        NotificationRequest request = new NotificationRequest(1005); //notificationId 1005
+        NotificationRequest request = new NotificationRequest(1006); //notificationId 1005
         NotificationRequest.NotificationNormalContent content = new NotificationRequest.NotificationNormalContent();
         NotificationRequest.NotificationContent notificationContent = new NotificationRequest.NotificationContent(content);
         request.setContent(notificationContent);
@@ -99,13 +93,6 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     @Override
     public void onDisconnect(Intent intent) {
     }
-
-/*    public IMediaPlayer getMediaPlayer() {
-        if (mMediaPlayer != null) {
-            return mMediaPlayer;
-        }
-        return null;
-    }*/
 
     private void openAudio() {
         if (mUri == null) {
@@ -161,7 +148,6 @@ public class IjkAudioPlayerServiceAbility extends Ability {
             mMediaPlayer = null;
             mCurrentState = STATE_IDLE;
             mTargetState = STATE_IDLE;
-            // 释放音频焦点
             if (audioManager != null && audioInterrupt != null) {
                 audioManager.deactivateAudioInterrupt(audioInterrupt);
             }
