@@ -8,6 +8,7 @@ public class MainAbility extends Ability {
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
+        setSwipeToDismiss(true);
         super.setMainRoute(MainAbilitySlice.class.getName());
     }
 }

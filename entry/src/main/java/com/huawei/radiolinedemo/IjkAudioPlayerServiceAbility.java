@@ -1,6 +1,7 @@
 package com.huawei.radiolinedemo;
 
 import com.huawei.radiolinedemo.slice.NoInternetSlice;
+import com.huawei.radiolinedemo.utils.LogUtils;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
 import ohos.aafwk.content.Operation;
@@ -27,8 +28,8 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     private static final HiLogLabel TAG = new HiLogLabel(3, 0xD001100, "IjkAudioPlayerServiceAbility");
 
     //private Uri mUri = "https://16533.mc.tritondigital.com/OMNY_CONANOBRIENNEEDSAFRIEND_PODCAST_P/media-session/bbb66f89-e01e-4fd2-bbc4-a20e7f9fec84/d/clips/aaea4e69-af51-495e-afc9-a9760146922b/0a686f81-0eeb-455b-98be-ab0d00055d5e/83272972-190e-45dd-9e82-ad42015e06aa/audio/direct/t1623297669/Energeeza.mp3?t=1623297669&in_playlist=1fab2b0b-a7f0-4d71-bf6d-ab0d00055d6c&utm_source=Podcast&_=1449481293";
-    //private Uri mUri = "https://stream.europe1.fr/europe1.mp3?aw_0_1st.playerid=lgrdrnwsRadioline&token=3f811fbf6aa6e073e195bbd15d5ca08a%2Fc2673535";
-    private String mUri = "http://icecast.skyrock.net/s/natio_mp3_128k?tvr_name=radioline2018&tvr_section1=128mp3";
+    private String mUri = "https://stream.europe1.fr/europe1.mp3?aw_0_1st.playerid=lgrdrnwsRadioline&token=3f811fbf6aa6e073e195bbd15d5ca08a%2Fc2673535";
+    //private String mUri = "http://icecast.skyrock.net/s/natio_mp3_128k?tvr_name=radioline2018&tvr_section1=128mp3";
     private IMediaPlayer mMediaPlayer = null;
 
     private int mCurrentBufferPercentage;
@@ -51,7 +52,7 @@ public class IjkAudioPlayerServiceAbility extends Ability {
     private long mPrepareStartTime = 0;
 
     private AudioManager audioManager;
-    private AudioInterrupt audioInterrupt;
+    private AudioInterrupt audioInterrupt = new AudioInterrupt();
 
     @Override
     public void onStart(Intent intent) {
@@ -65,6 +66,19 @@ public class IjkAudioPlayerServiceAbility extends Ability {
         PowerManager powerManager = new PowerManager();
         PowerManager.RunningLock runningLock = powerManager.createRunningLock("test",PowerManager.RunningLockType.BACKGROUND);
         runningLock.lock(5000000);
+
+        audioInterrupt.setInterruptListener(new AudioInterrupt.InterruptListener() {
+            @Override
+            public void onInterrupt(int i, int i1) {
+                if (i == AudioInterrupt.INTERRUPT_TYPE_BEGIN) {
+                    mMediaPlayer.pause();
+                } else if (i == AudioInterrupt.INTERRUPT_TYPE_END) {
+                    mMediaPlayer.start();
+                } else {
+                    LogUtils.warn(TAG,"interrupt error");
+                }
+            }
+        });
     }
 
     @Override
@@ -110,7 +124,7 @@ public class IjkAudioPlayerServiceAbility extends Ability {
         } catch (AudioRemoteException e) {
             HiLog.error(TAG, e.getMessage());
         }
-        audioInterrupt = new AudioInterrupt();
+        //audioInterrupt = new AudioInterrupt();
         audioManager.activateAudioInterrupt(audioInterrupt);
 
         try {
@@ -127,9 +141,35 @@ public class IjkAudioPlayerServiceAbility extends Ability {
             mMediaPlayer.prepareAsync();
             mCurrentState = STATE_PREPARING;
             HiLog.error(TAG, "---openAudio CurrentState" + mCurrentState);
+            toggle();
         } catch (IOException | IllegalArgumentException ex) {
             mCurrentState = STATE_ERROR;
             mTargetState = STATE_ERROR;
+        }
+    }
+
+    public static class VolumeUtils {
+        private static final int MAX = 5;
+        private static final int MIN = 0;
+        private static AudioManager mAudioManager = null;
+
+        public static AudioManager getAudioManager() {
+            if (mAudioManager == null) {
+                mAudioManager = new AudioManager("com.huawei.radiolinedemo");
+            }
+            return mAudioManager;
+        }
+    }
+
+    public void toggle() {
+        if (mMediaPlayer.isPlaying()) {
+            //Audio out of focus
+            VolumeUtils.getAudioManager().deactivateAudioInterrupt(audioInterrupt);
+            mMediaPlayer.pause();
+        } else {
+            //Audio gets focus
+            VolumeUtils.getAudioManager().activateAudioInterrupt(audioInterrupt);
+            mMediaPlayer.start();
         }
     }
 

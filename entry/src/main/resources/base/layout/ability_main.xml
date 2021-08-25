@@ -61,7 +61,7 @@
             ohos:text_color="#FFF2F8F8"
             ohos:text_size="40"/>
 
-        <Text
+       <!-- <Text
             ohos:id="$+id:notify2_reply"
             ohos:width="match_parent"
             ohos:height="match_content"
@@ -72,7 +72,7 @@
             ohos:text_color="#ff888888"
             ohos:text_alignment="center"
             ohos:multiple_lines="true"
-            ohos:top_margin="5vp"/>
+            ohos:top_margin="5vp"/>-->
 
     </DirectionalLayout>
 

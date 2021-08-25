@@ -131,16 +131,15 @@ public class IjkAudioPlayAbilitySlice extends AbilitySlice {
             if(touchEvent.getAction() == TouchEvent.PRIMARY_POINT_DOWN){
                 downPoint = touchEvent.getPointerScreenPosition(0);
                 startPositionX = downPoint.getX();
+                HiLog.warn(TAG, "====startPositionX==="+startPositionX);
             }
             if(touchEvent.getAction() == TouchEvent.POINT_MOVE){
                 movePoint = touchEvent.getPointerScreenPosition(0);
                 endPositionX = movePoint.getX();
-                if(startPositionX<endPositionX){
-                    moveRight = true;
-                }else{
-                    moveRight = false;
+                HiLog.warn(TAG, "====endPositionX==="+endPositionX);
+                if(endPositionX - startPositionX > 10){
+                    terminate();
                 }
-                terminate();
             }
             return true;
         }

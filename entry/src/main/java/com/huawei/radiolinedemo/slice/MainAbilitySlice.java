@@ -66,12 +66,12 @@ public class MainAbilitySlice extends AbilitySlice{
                     return;
                 }
                 String inputText =pacMap.getString("REPLY_KEY");
-                slice.getUITaskDispatcher().asyncDispatch(()-> {
+                /*slice.getUITaskDispatcher().asyncDispatch(()-> {
                     Text replyText = (Text) slice.findComponentById(ResourceTable.Id_notify2_reply);
                     replyText.setText(inputText);
                     replyText.setTruncationMode(Text.TruncationMode.AUTO_SCROLLING);
                     replyText.startAutoScrolling();
-                });
+                });*/
             }
         }
     }
@@ -123,7 +123,7 @@ public class MainAbilitySlice extends AbilitySlice{
                         HiLog.error(TAG, "===========connected.");
                     }else {
                         HiLog.error(TAG, "===========disconnected.");
-                        present(new NoInternetSlice(), new Intent());
+                        present(new NoInternetSlice(), new Intent()); //This one to present the network unavailable page
                         terminate();
                     }
                 } catch (Exception e) {

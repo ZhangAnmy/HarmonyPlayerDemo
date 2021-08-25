@@ -61,7 +61,7 @@ public class PlayAbilitySlice extends AbilitySlice {
         loadingImgContent = (DirectionalLayout)findComponentById(ResourceTable.Id_loading_img_content);
         perProgressBar = (ProgressBar) findComponentById(ResourceTable.Id_VideoProgressBar);
         networkStatusContnt = (DirectionalLayout) findComponentById(ResourceTable.Id_network_status_content);
-        mainContent.setTouchEventListener(new touchHandler());
+        //mainContent.setTouchEventListener(new touchHandler());
         animatorPropertyHandle();
         queryNetworkStatus();
         initMusicVolumn();
