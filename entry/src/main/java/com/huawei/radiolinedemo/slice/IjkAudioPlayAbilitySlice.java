@@ -46,9 +46,7 @@ public class IjkAudioPlayAbilitySlice extends AbilitySlice {
     private Revocable revocable = null;
     private String currentStatus = null;
     private AudioManager audioManager = new AudioManager(this);
-    private AudioInterrupt audioInterrupt = new AudioInterrupt();
     DatabaseHelper databaseHelper = new DatabaseHelper(this);
-    RadioInfoManager radioInfoManager = RadioInfoManager.getInstance(this);
     @Override
     public void onStart(Intent intent) {
         super.onStart(intent);
