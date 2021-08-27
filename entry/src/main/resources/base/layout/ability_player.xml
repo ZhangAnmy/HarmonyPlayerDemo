@@ -47,7 +47,7 @@
 				ohos:height="match_content"
 				ohos:width="match_content"
 				ohos:bottom_margin="15px"
-				ohos:text="IjkPlayer"
+				ohos:text="Player"
 				ohos:text_size="26px"
 				ohos:text_weight="700"
 				ohos:text_color="#FF085AE9"/>
